@@ -34,7 +34,7 @@ function updateResultDiv(result) {
     const resultDiv = document.querySelector(".result");
     switch (result) {
         case -1:
-            resultDiv.innerText = "You lose";
+            resultDiv.innerText = "You Lose";
             break;
         case 0:
             resultDiv.innerText = "Tie";
@@ -49,9 +49,9 @@ function getPlayerSelection() {
     return prompt("Enter your choice (Rock/Paper/Scissors): ", "").toLowerCase();
 }
 
-const playButtons = document.querySelectorAll(".play-button");
-playButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        updateResultDiv(playRound(button.innerText.toLowerCase()));
+const playImages = document.querySelectorAll(".play");
+playImages.forEach((images) => {
+    images.addEventListener("click", () => {
+        updateResultDiv(playRound(images.attributes["alt"].value));
     })
 });
