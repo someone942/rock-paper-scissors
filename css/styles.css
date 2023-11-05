@@ -27,6 +27,14 @@ body {
     background-image: url(../images/scissors.svg);
 }
 
+.play-button.lizard {
+    background-image: url(../images/lizard.svg);
+}
+
+.play-button.spock {
+    background-image: url(../images/spock.svg)
+}
+
 h1 {
     text-align: center;
     font-size: 64px;
