@@ -2,6 +2,10 @@ const CHOICES = ["Rock", "Paper", "Scissors"];
 let playerScore = 0;
 let computerScore = 0;
 
+function capitalizeFirstLetter(word) {
+    return word[0].toUpperCase() + word.slice(1);
+}
+
 function getComputerChoice() {
     return CHOICES[Math.floor(Math.random() * 3)];
 }
@@ -12,6 +16,8 @@ function playRound(playerSelection) {
     console.log(playerSelection);
     lowerCasePlayerSelection = playerSelection.toLowerCase();
     lowerCaseComputerSelection = getComputerChoice().toLowerCase();
+
+    updateChoicesSelection(lowerCasePlayerSelection, lowerCaseComputerSelection);
 
     if (lowerCaseComputerSelection === lowerCasePlayerSelection) {
         updateGameScore(0);
@@ -26,6 +32,13 @@ function playRound(playerSelection) {
     }
 
     updateGameScore(-1);
+}
+
+function updateChoicesSelection(playerSelection, computerSelection) {
+    const playerChoiceText = document.querySelector(".player-choice");
+    playerChoiceText.innerText = capitalizeFirstLetter(playerSelection);
+    const computerChoiceText = document.querySelector(".computer-choice");
+    computerChoiceText.innerText = capitalizeFirstLetter(computerSelection);
 }
 
 function updateGameScore(result) {
@@ -101,7 +114,12 @@ function resetGame() {
     resultText.innerText = "";
 
     playerScore = 0;
-    computerScore = 0;    
+    computerScore = 0;
+    
+    const playerChoice = document.querySelector(".player-choice");
+    playerChoice.innerText = "";
+    const computerChoice = document.querySelector(".computer-choice");
+    computerChoice.innerText = "";
 }
 
 const playButtons = document.querySelectorAll(".play-button");

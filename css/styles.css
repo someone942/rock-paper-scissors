@@ -1,5 +1,7 @@
 body {
     background-color: lightblue;
+    width: 700px;
+    margin: 0 auto;
 }
 
 .play-button {
@@ -59,7 +61,7 @@ h1 {
 .content {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 20px;
 }
 
 .scoreboard {
@@ -86,4 +88,19 @@ h1 {
 
 .hide-element {
     display: none;
+}
+
+.choices {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.choices span {
+    display: flex;
+}
+
+.choices p {
+    font-size: 32px;
+    margin-right: 10px;
 }
