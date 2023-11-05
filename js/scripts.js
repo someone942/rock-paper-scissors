@@ -12,9 +12,10 @@ function getComputerChoice() {
 
 /* The function compares the playerSelection with the computerSelection
 and will return either 0 for a tie, 1 for a win or -1 for a loss */
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    console.log(playerSelection);
     lowerCasePlayerSelection = playerSelection.toLowerCase();
-    lowerCaseComputerSelection = computerSelection.toLowerCase();
+    lowerCaseComputerSelection = getComputerChoice().toLowerCase();
 
     if (lowerCaseComputerSelection === lowerCasePlayerSelection) {
         return 0
@@ -29,38 +30,28 @@ function playRound(playerSelection, computerSelection) {
     return -1
 }
 
+function updateResultDiv(result) {
+    const resultDiv = document.querySelector(".result");
+    switch (result) {
+        case -1:
+            resultDiv.innerText = "You lose";
+            break;
+        case 0:
+            resultDiv.innerText = "Tie";
+            break;
+        case 1:
+            resultDiv.innerText = "You Win";
+            break;
+    }
+}
+
 function getPlayerSelection() {
     return prompt("Enter your choice (Rock/Paper/Scissors): ", "").toLowerCase();
 }
 
-function game() {
-    for (i = 0; i <= 4; i++) {
-        result = playRound(getPlayerSelection(), getComputerChoice())
-
-        switch (result) {
-            case -1:
-                message = `You Lose! Player: ${capitalizeFirstLetter(lowerCasePlayerSelection)} vs. Computer: ${capitalizeFirstLetter(lowerCaseComputerSelection)}`;
-                computerWon += 1;
-                break;
-            case 0:
-                message = `Tie! Player: ${capitalizeFirstLetter(lowerCasePlayerSelection)} vs. Computer: ${capitalizeFirstLetter(lowerCaseComputerSelection)}`;
-                break;
-            case 1:
-                message = `You Win! Player: ${capitalizeFirstLetter(lowerCasePlayerSelection)} vs. Computer: ${capitalizeFirstLetter(lowerCaseComputerSelection)}`;
-                playerWon += 1;
-                break;
-        }
-        console.log(message);
-    }
-    if (playerWon > computerWon) {
-        console.log(`You win the game! Player: ${playerWon} Computer: ${computerWon}`)
-    }
-    else if (playerWon === computerWon) {
-        console.log(`Game Tie! Player: ${playerWon} Computer: ${computerWon}`)
-    }
-    else {
-        console.log(`You lose the game! Player: ${playerWon} Computer: ${computerWon}`)
-    }
-}
-
-game();
+const playButtons = document.querySelectorAll(".play-button");
+playButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        updateResultDiv(playRound(button.innerText.toLowerCase()));
+    })
+});
