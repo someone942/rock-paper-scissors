@@ -30,28 +30,36 @@ function playRound(playerSelection) {
     return -1
 }
 
+function updateGameScore(result) {
+    updateResultDiv(result);
+    updateScoreboard(result);
+}
+
 function updateResultDiv(result) {
-    const resultDiv = document.querySelector(".result-text");
+    const resultText = document.querySelector(".result-text");
     switch (result) {
         case -1:
-            resultDiv.innerText = "You Lose";
+            resultText.innerText = "You Lose";
             break;
         case 0:
-            resultDiv.innerText = "Tie";
+            resultText.innerText = "Tie";
             break;
         case 1:
-            resultDiv.innerText = "You Win";
+            resultText.innerText = "You Win";
             break;
     }
 }
 
-function getPlayerSelection() {
-    return prompt("Enter your choice (Rock/Paper/Scissors): ", "").toLowerCase();
+function updateScoreboard(result) {
+    const playerScore = document.querySelector(".player-score");
+    const computerScore = document.querySelector(".computer-score");
+    playerScore.innerText = +playerScore.innerText + (result > 0 ? 1 : 0);
+    computerScore.innerText = +computerScore.innerText + (result < 0 ? 1 : 0);
 }
 
 const playImages = document.querySelectorAll(".play");
 playImages.forEach((images) => {
     images.addEventListener("click", () => {
-        updateResultDiv(playRound(images.attributes["alt"].value));
+        updateGameScore(playRound(images.attributes["alt"].value));
     })
 });
