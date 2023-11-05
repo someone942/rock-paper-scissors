@@ -1,6 +1,6 @@
 const CHOICES = ["Rock", "Paper", "Scissors"];
-let playerWon = 0;
-let computerWon = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     return CHOICES[Math.floor(Math.random() * 3)];
@@ -14,21 +14,24 @@ function playRound(playerSelection) {
     lowerCaseComputerSelection = getComputerChoice().toLowerCase();
 
     if (lowerCaseComputerSelection === lowerCasePlayerSelection) {
-        return 0
+        updateGameScore(0);
+        return;
     }
     
     if ((lowerCaseComputerSelection === "paper" && lowerCasePlayerSelection === "scissors")
         || (lowerCaseComputerSelection === "rock" && lowerCasePlayerSelection === "paper")
         || (lowerCaseComputerSelection === "scissors" && lowerCasePlayerSelection === "rock")) {
-        return 1
+            updateGameScore(1);
+            return;
     }
 
-    return -1
+    updateGameScore(-1);
 }
 
 function updateGameScore(result) {
     updateResultDiv(result);
     updateScoreboard(result);
+    checkGameHasEnded();
 }
 
 function updateResultDiv(result) {
@@ -47,15 +50,67 @@ function updateResultDiv(result) {
 }
 
 function updateScoreboard(result) {
-    const playerScore = document.querySelector(".player-score");
-    const computerScore = document.querySelector(".computer-score");
-    playerScore.innerText = +playerScore.innerText + (result > 0 ? 1 : 0);
-    computerScore.innerText = +computerScore.innerText + (result < 0 ? 1 : 0);
+    const playerScoreText = document.querySelector(".player-score");
+    const computerScoreText = document.querySelector(".computer-score");
+    playerScore = playerScore + (result > 0 ? 1 : 0);
+    computerScore = computerScore + (result < 0 ? 1 : 0);
+
+    playerScoreText.innerText = playerScore;
+    computerScoreText.innerText = computerScore;
 }
 
-const playImages = document.querySelectorAll(".play");
-playImages.forEach((images) => {
-    images.addEventListener("click", () => {
-        updateGameScore(playRound(images.attributes["alt"].value));
-    })
+function checkGameHasEnded() {
+    if (playerScore >= 5 || computerScore >= 5) {
+        endGame();
+    }
+
+    const resultText = document.querySelector(".result-text");
+    if (playerScore >= 5) {
+        resultText.innerText = "You win the game!";
+    }
+    else if (computerScore >= 5) {
+        resultText.innerText = "You lose the game!";
+    }
+}
+
+function endGame() {
+    const playButtons = document.querySelectorAll(".play-button");
+    playButtons.forEach((playButton) => {
+        playButton.disabled = true;
+    });
+    
+    const playAgainButton = document.querySelector(".play-again");
+    playAgainButton.classList.toggle("hide-element");
+}
+
+function resetGame() {
+    const playButtons = document.querySelectorAll(".play-button");
+    playButtons.forEach((playButton) => {
+        playButton.disabled = false;
+    });
+
+    const playAgainButton = document.querySelector(".play-again");
+    playAgainButton.classList.toggle("hide-element");
+
+
+    const playerScoreText = document.querySelector(".player-score");
+    playerScoreText.innerText = 0;
+    const computerScoreText = document.querySelector(".computer-score");
+    computerScoreText.innerText = 0;
+    const resultText = document.querySelector(".result-text");
+    resultText.innerText = "";
+
+    playerScore = 0;
+    computerScore = 0;    
+}
+
+const playButtons = document.querySelectorAll(".play-button");
+playButtons.forEach((playButton) => {
+    playButton.addEventListener("click", () => {
+        playRound(playButton.innerText.toLowerCase())
+    });
 });
+
+const playAgainButton = document.querySelector(".play-again");
+playAgainButton.addEventListener("click", resetGame);
+playAgainButton.classList.toggle("hide-element");
