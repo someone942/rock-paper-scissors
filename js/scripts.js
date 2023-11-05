@@ -2,10 +2,6 @@ const CHOICES = ["Rock", "Paper", "Scissors"];
 let playerWon = 0;
 let computerWon = 0;
 
-function capitalizeFirstLetter(string) {
-    return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase();
-}
-
 function getComputerChoice() {
     return CHOICES[Math.floor(Math.random() * 3)];
 }
