@@ -31,7 +31,7 @@ function playRound(playerSelection) {
 }
 
 function updateResultDiv(result) {
-    const resultDiv = document.querySelector(".result");
+    const resultDiv = document.querySelector(".result-text");
     switch (result) {
         case -1:
             resultDiv.innerText = "You Lose";
