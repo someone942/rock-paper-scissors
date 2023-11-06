@@ -1,4 +1,4 @@
-const CHOICES = ["Rock", "Paper", "Scissors"];
+const CHOICES = ["Rock", "Paper", "Scissors", "Lizard", "Spock"];
 let playerScore = 0;
 let computerScore = 0;
 
@@ -7,26 +7,32 @@ function capitalizeFirstLetter(word) {
 }
 
 function getComputerChoice() {
-    return CHOICES[Math.floor(Math.random() * 3)];
+    return CHOICES[Math.floor(Math.random() * 5)];
 }
 
 /* The function compares the playerSelection with the computerSelection
 and will return either 0 for a tie, 1 for a win or -1 for a loss */
 function playRound(playerSelection) {
-    console.log(playerSelection);
-    lowerCasePlayerSelection = playerSelection.toLowerCase();
-    lowerCaseComputerSelection = getComputerChoice().toLowerCase();
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = getComputerChoice().toLowerCase();
 
-    updateChoicesSelection(lowerCasePlayerSelection, lowerCaseComputerSelection);
+    updateChoicesSelection(playerSelection, computerSelection);
 
-    if (lowerCaseComputerSelection === lowerCasePlayerSelection) {
+    if (computerSelection === playerSelection) {
         updateGameScore(0);
         return;
     }
     
-    if ((lowerCaseComputerSelection === "paper" && lowerCasePlayerSelection === "scissors")
-        || (lowerCaseComputerSelection === "rock" && lowerCasePlayerSelection === "paper")
-        || (lowerCaseComputerSelection === "scissors" && lowerCasePlayerSelection === "rock")) {
+    if (playerSelection === "scissors" && computerSelection === "paper"
+        || playerSelection === "paper" && computerSelection === "rock"
+        || playerSelection === "rock" && computerSelection === "lizard"
+        || playerSelection === "lizard" && computerSelection === "spock"
+        || playerSelection === "spock" && computerSelection === "scissors"
+        || playerSelection === "scissors" && computerSelection === "lizard"
+        || playerSelection === "lizard" && computerSelection === "paper"
+        || playerSelection === "paper" && computerSelection === "spock"
+        || playerSelection === "spock" && computerSelection === "rock"
+        || playerSelection === "rock" && computerSelection === "scissors") {
             updateGameScore(1);
             return;
     }

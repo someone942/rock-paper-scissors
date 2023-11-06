@@ -10,29 +10,31 @@ body {
     background-size: contain;
     background-position: center;
     border: none;
-    width: 150px;
+    width: 100px;
     height: 150px;
     color: transparent;
 }
 
 .play-button.rock {
-    background-image: url(../images/rock.svg);
+    background-image: url(../images/rock.png);
+    width: 130px;
 }
 
 .play-button.paper {
-    background-image: url(../images/paper.svg);
+    background-image: url(../images/paper.png);
 }
 
 .play-button.scissors {
-    background-image: url(../images/scissors.svg);
+    background-image: url(../images/scissors.png);
+    width: 160px
 }
 
 .play-button.lizard {
-    background-image: url(../images/lizard.svg);
+    background-image: url(../images/lizard.png);
 }
 
 .play-button.spock {
-    background-image: url(../images/spock.svg)
+    background-image: url(../images/spock.png);
 }
 
 h1 {
@@ -40,7 +42,7 @@ h1 {
     font-size: 64px;
 }
 
-.container {
+.card-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,4 +113,21 @@ h1 {
 .choices p {
     font-size: 32px;
     margin-right: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+    text-align: center;
+    font-size: 24px;
+    border: 2px solid rgb(149, 209, 255);
+    border-radius: 15px;
+    width: 120px;
+    background-color: lightskyblue;
 }
