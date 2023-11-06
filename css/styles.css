@@ -14,6 +14,10 @@ body {
     color: transparent;
 }
 
+.play-button:hover {
+    transform: scale(1.2);
+}
+
 .play-button.rock {
     background-image: url(../images/rock.png);
     width: 130px;
